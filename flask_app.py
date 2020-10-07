@@ -46,7 +46,7 @@ def get(method,country):
     str_content = raw_content.decode('utf8').replace("'", '"')
     response_json = json.loads(str_content)
 
-    #wanted data -> relevant key
+    #wendpoint name -> api key
     if method == 'newCasesPeak':
         key = 'cases'
 
@@ -77,7 +77,7 @@ def get(method,country):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 
 
 
