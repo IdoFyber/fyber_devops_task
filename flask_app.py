@@ -46,7 +46,7 @@ def get(method,country):
     str_content = raw_content.decode('utf8').replace("'", '"')
     response_json = json.loads(str_content)
 
-    #wendpoint name -> api key
+    #endpoint name -> api key
     if method == 'newCasesPeak':
         key = 'cases'
 
