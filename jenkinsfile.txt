@@ -1,0 +1,53 @@
+pipeline {
+    agent any 
+    parameters {
+        string(name: 'endpoint',
+            defaultValue: 'newCasesPeak',
+            description: 'enter wanted endpoint')
+        string(name: 'country',
+            defaultValue: 'israel',
+            description: 'enter wanter country')
+    }
+    
+
+    stages {
+           stage('clone') { 
+            steps{    
+                echo "cloning git repo"
+                git branch: 'main', url: 'https://github.com/IdoFyber/fyber_devops_task.git'
+            }    
+        }
+            stage('build_app') {
+                steps{
+                echo "Enabling requests to localhost"
+                sh 'python3.6 script2.py'
+             }
+
+            } 
+            stage('tests') {
+                steps{
+                echo 'checking app status'
+                sh 'curl localhost:5000/status'
+                echo 'checking app parameters'
+                sh 'curl localhost:5000/"${params.endpoint}"?country="${params.country}"'
+             }
+
+            } 
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
